@@ -8,7 +8,7 @@
 
 ### 必须配置
 
-**修改文件`openssl_csr.conf`中的`alt_names`段下的相关站点配置，将您需要进行自签的域名与 IP 配置进去**
+**修改文件`openssl_intermediate_ca.conf`中的`alt_names`段下的相关站点配置，将您需要进行自签的域名与 IP 配置进去**
 
 ### 可选配置
 

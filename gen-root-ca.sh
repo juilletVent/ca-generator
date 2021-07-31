@@ -11,8 +11,9 @@ cd root
 # cert 目录存放根证书
 # signed_certs 目录存放根证书签发过的证书的副本
 mkdir cert private signed_certs
-touch index.txt serial
+touch index.txt index.txt.attr serial
 echo 0001 >serial
+echo unique_subject = no > index.txt.attr
 # 拷贝CA生成配置文件
 cp ../../openssl_root_ca.conf ./openssl_root_ca.conf
 # 生成CA私钥
