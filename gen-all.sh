@@ -3,6 +3,10 @@
 rm -rf ./certificate-signature
 mkdir certificate-signature
 
+# ======================= 证书描述信息替换 =======================
+
+./gen-config.sh
+
 # ======================= 创建根CA =======================
 ./gen-root-ca.sh
 

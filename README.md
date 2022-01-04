@@ -14,12 +14,13 @@
 
 如果不配置不影响使用，如果您不在乎 CA 与证书相关的描述与所有者信息的话（主要描述的是区域信息、公司信息、所有者信息、邮箱）
 
-0. 修改默认配置文件`openssl_config_default.properties`，然后执行 `./gen-config.sh` 进行变量替换
-1. 修改文件`gen-root-ca.sh`第 21 与 24 行，配置`-subj`参数，如果您不知道此参数的作用与含义，您也可以直接删除`-subj`参数及其值
-2. 修改文件`openssl_root_ca.conf`名为`req_distinguished_name`配置段的 default 结尾的配置，相关含义参阅单词意思或官方文档
-3. 修改文件`gen-intermediate-ca.sh`第 21 与 23 行，配置`-subj`参数，如果您不知道此参数的作用与含义，您也可以直接删除`-subj`参数及其值
-4. 修改文件`openssl_intermediate_ca.conf`名为`req_distinguished_name`配置段的 default 结尾的配置，相关含义参阅单词意思或官方文档
-5. 修改文件`gen-web-certificate.sh`第 16 与 16 行，配置`-subj`参数，如果您不知道此参数的作用与含义，您也可以直接删除`-subj`参数及其值
+修改默认配置文件`openssl_config_default.properties`，具体配置含义，请参考：[opensslconf 配置](https://www.phildev.net/ssl/opensslconf.html)中的 req_distinguished_name 段
+
+### 关于 Cmder 执行环境
+
+不支持 Cmder 执行环境：find 会命中 DOS 的 find 命令，而不是 MinGW 的模拟的 find 命令
+
+如果您清楚如何修改证书配置信息，可以自行修改配置信息，然后直接生成。或者使用 linux 环境、Windows 下的 WSL 环境、Unix 环境或者 GitBash 环境
 
 ### 开始生成
 
