@@ -39,5 +39,10 @@ for element in $(find . -name "*.conf" -type f); do
     conf_file=$element
     handle_placeholder $conf_file
 done
+echo "====替换CA执行文件===="
+for element in $(find . -name "*.sh" -type f); do
+    conf_file=$element
+    handle_placeholder $conf_file
+done
 echo "================="
-echo "配置生成成功，位置: $(pwd)"
+echo "CA变量替换完成: $(pwd)"

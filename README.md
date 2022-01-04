@@ -13,6 +13,7 @@
 ### 可选配置
 
 如果不配置不影响使用，如果您不在乎 CA 与证书相关的描述与所有者信息的话（主要描述的是区域信息、公司信息、所有者信息、邮箱）
+
 0. 修改默认配置文件`openssl_config_default.properties`，然后执行 `./gen-config.sh` 进行变量替换
 1. 修改文件`gen-root-ca.sh`第 21 与 24 行，配置`-subj`参数，如果您不知道此参数的作用与含义，您也可以直接删除`-subj`参数及其值
 2. 修改文件`openssl_root_ca.conf`名为`req_distinguished_name`配置段的 default 结尾的配置，相关含义参阅单词意思或官方文档

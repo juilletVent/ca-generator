@@ -14,9 +14,9 @@ openssl genrsa -out server.key.pem 4096
 envStr=$(uname -a)
 # 创建证书签发申请
 if [[ $envStr =~ 'MINGW' ]]; then
-  openssl req -config openssl_csr.conf -subj "//C=CN\ST=CQ\L=CQ\O=JulyWind\OU=JulyWind\CN=JulyWind-WEB" -new -sha256 -key server.key.pem -out server.csr.pem
+  openssl req -config openssl_csr.conf -subj "//C={{CA_C}}\ST={{CA_ST}}\L={{CA_L}}\O={{CA_O}}\OU={{CA_OU}}\CN={{CA_CN}}-WEB" -new -sha256 -key server.key.pem -out server.csr.pem
 else
-  openssl req -config openssl_csr.conf -subj "/C=CN/ST=CQ/L=CQ/O=JulyWind/OU=JulyWind/CN=JulyWind-WEB" -new -sha256 -key server.key.pem -out server.csr.pem
+  openssl req -config openssl_csr.conf -subj "/C={{CA_C}}\ST={{CA_ST}}\L={{CA_L}}\O={{CA_O}}\OU={{CA_OU}}\CN={{CA_CN}}-WEB" -new -sha256 -key server.key.pem -out server.csr.pem
 fi
 cd ../intermediate
 # 使用中间CA配置签署站点证书

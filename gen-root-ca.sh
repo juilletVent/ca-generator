@@ -22,10 +22,10 @@ openssl genrsa -out private/root_ca.key.pem 4096
 envStr=$(uname -a)
 if [[ $envStr =~ 'MINGW' ]]; then
   # 如果是MinGW环境则使用这个路径
-  openssl req -config openssl_root_ca.conf -subj "//C=CN\ST=CQ\L=CQ\O=JulyWind\OU=JulyWind\CN=JulyWind-ROOT-CA" -new -x509 -days 36500 -sha256 -extensions root_ca -key private/root_ca.key.pem -out cert/root_ca.cert.pem
+  openssl req -config openssl_root_ca.conf -subj "//C={{CA_C}}\ST={{CA_ST}}\L={{CA_L}}\O={{CA_O}}\OU={{CA_OU}}\CN={{CA_CN}}-ROOT-CA" -new -x509 -days 36500 -sha256 -extensions root_ca -key private/root_ca.key.pem -out cert/root_ca.cert.pem
 else
   # 如果是Linux环境环境则使用这个路径
-  openssl req -config openssl_root_ca.conf -subj "/C=CN/ST=CQ/L=CQ/O=JulyWind/OU=JulyWind/CN=JulyWind-ROOT-CA" -new -x509 -days 36500 -sha256 -extensions root_ca -key private/root_ca.key.pem -out cert/root_ca.cert.pem
+  openssl req -config openssl_root_ca.conf -subj "/C={{CA_C}}\ST={{CA_ST}}\L={{CA_L}}\O={{CA_O}}\OU={{CA_OU}}\CN={{CA_CN}}-ROOT-CA" -new -x509 -days 36500 -sha256 -extensions root_ca -key private/root_ca.key.pem -out cert/root_ca.cert.pem
 fi
 # 查看CA信息
 openssl x509 -noout -text -in cert/root_ca.cert.pem
