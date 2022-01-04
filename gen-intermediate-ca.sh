@@ -24,9 +24,9 @@ openssl genrsa -out private/intermediate_ca.key.pem 4096
 envStr=$(uname -a)
 # # 生成中间CA签名申请文件
 if [[ $envStr =~ 'MINGW' ]]; then
-  openssl req -config openssl_intermediate_ca.conf -subj "//C=CN\ST=CQ\L=CQ\O=JulyWind\OU=JulyWind\CN=JulyWind-INTERMEDIATE-CA" -new -sha256 -key private/intermediate_ca.key.pem -out csr/intermediate_ca.csr.pem
+  openssl req -config openssl_intermediate_ca.conf -subj "//C={{CA_C}}\ST={{CA_ST}}\L={{CA_L}}\O={{CA_O}}\OU={{CA_OU}}\CN={{CA_CN}}-INTERMEDIATE-CA" -new -sha256 -key private/intermediate_ca.key.pem -out csr/intermediate_ca.csr.pem
 else
-  openssl req -config openssl_intermediate_ca.conf -subj "/C=CN/ST=CQ/L=CQ/O=JulyWind/OU=JulyWind/CN=JulyWind-INTERMEDIATE-CA" -new -sha256 -key private/intermediate_ca.key.pem -out csr/intermediate_ca.csr.pem
+  openssl req -config openssl_intermediate_ca.conf -subj "/C={{CA_C}}\ST={{CA_ST}}\L={{CA_L}}\O={{CA_O}}\OU={{CA_OU}}\CN={{CA_CN}}-INTERMEDIATE-CA" -new -sha256 -key private/intermediate_ca.key.pem -out csr/intermediate_ca.csr.pem
 fi
 # # 使用根证书签发中间证书
 cd ../root
