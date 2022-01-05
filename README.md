@@ -18,7 +18,7 @@
 
 ### 关于 Cmder 执行环境
 
-不支持 Cmder 执行环境：find 会命中 DOS 的 find 命令，而不是 MinGW 的模拟的 find 命令
+Cmder 执行环境：find 可能会命中 DOS 的 find 命令，而不是 MinGW 的模拟的 find 命令，请正确配置您的Cmder环境变量，并在cmder中正确执行。
 
 如果您清楚如何修改证书配置信息，可以自行修改配置信息，然后直接生成。或者使用 linux 环境、Windows 下的 WSL 环境、Unix 环境或者 GitBash 环境
 
