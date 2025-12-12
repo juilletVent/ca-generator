@@ -249,7 +249,7 @@ function generate_web_certificate() {
     echo -e "${YELLOW}[INFO]${NC} 生成站点证书签名请求（包含SAN扩展）..."
     
     # 构建 subject 字符串（站点证书使用通配符域名）
-    SUBJECT="/C=${CA_CONFIG[CA_C]}/ST=${CA_CONFIG[CA_ST]}/L=${CA_CONFIG[CA_L]}/O=${CA_CONFIG[CA_O]}/OU=IT Services/CN=*.internal.local/emailAddress=${CA_CONFIG[CA_EMAIL]}"
+    SUBJECT="/C=${CA_CONFIG[CA_C]}/ST=${CA_CONFIG[CA_ST]}/L=${CA_CONFIG[CA_L]}/O=${CA_CONFIG[CA_O]}/OU=IT Services/CN=${CA_CONFIG[CA_SERVER_CN]}/emailAddress=${CA_CONFIG[CA_EMAIL]}"
     
     envStr=$(uname -a)
     if [[ $envStr =~ 'MINGW' ]]; then
@@ -263,7 +263,7 @@ function generate_web_certificate() {
     # 使用中间CA签发（从CSR复制扩展信息）
     echo -e "${YELLOW}[INFO]${NC} 使用中间CA签发站点证书（从CSR复制SAN配置）..."
     cd ../intermediate
-    openssl ca -batch -config openssl_intermediate_ca.conf -extensions server_cert -days 1800 -notext -md sha256 -in ../server/server.csr.pem -out ../server/server.cert.pem
+    openssl ca -batch -config openssl_intermediate_ca.conf -extensions server_cert -days 31 -notext -md sha256 -in ../server/server.csr.pem -out ../server/server.cert.pem
     
     # 验证证书
     echo -e "${YELLOW}[INFO]${NC} 验证站点证书..."
