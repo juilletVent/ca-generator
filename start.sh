@@ -260,10 +260,19 @@ function generate_web_certificate() {
     # -reqexts v3_req 确保将扩展信息（包括SAN）包含到CSR中
     openssl req -config openssl_csr.conf -reqexts v3_req -subj "$SUBJECT" -new -sha256 -key server.key.pem -out server.csr.pem
     
+    # 设置站点证书有效期（天）
+    read -p "请输入站点证书有效期（天）[默认: 31]: " CERT_DAYS
+    CERT_DAYS=${CERT_DAYS:-31}
+    if ! [[ "$CERT_DAYS" =~ ^[1-9][0-9]*$ ]]; then
+        echo -e "${RED}[ERROR]${NC} 无效的天数，使用默认值: 31 天"
+        CERT_DAYS=31
+    fi
+    echo -e "${YELLOW}[INFO]${NC} 站点证书有效期: ${CERT_DAYS} 天"
+
     # 使用中间CA签发（从CSR复制扩展信息）
     echo -e "${YELLOW}[INFO]${NC} 使用中间CA签发站点证书（从CSR复制SAN配置）..."
     cd ../intermediate
-    openssl ca -batch -config openssl_intermediate_ca.conf -extensions server_cert -days 31 -notext -md sha256 -in ../server/server.csr.pem -out ../server/server.cert.pem
+    openssl ca -batch -config openssl_intermediate_ca.conf -extensions server_cert -days ${CERT_DAYS} -notext -md sha256 -in ../server/server.csr.pem -out ../server/server.cert.pem
     
     # 验证证书
     echo -e "${YELLOW}[INFO]${NC} 验证站点证书..."
